@@ -14,7 +14,6 @@ public class SemaphoreSequenceGenerator extends SequenceGenerator {
 
     @Override
     public int getNextSequence() {
-        int seq = 0;
         try {
             MUTEX.acquire();
             return super.getNextSequence();

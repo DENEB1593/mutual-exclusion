@@ -17,12 +17,12 @@ public class SemaphoreSequenceGenerator extends SequenceGenerator {
         int seq = 0;
         try {
             MUTEX.acquire();
-            seq = super.getNextSequence();
-            MUTEX.release();
+            return super.getNextSequence();
         } catch (InterruptedException e) {
-            // 예외 처리 시 추가한다.
+            throw new RuntimeException(e);
         } finally {
-            return seq;
+            MUTEX.release();
         }
+
     }
 }
